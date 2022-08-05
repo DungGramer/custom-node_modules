@@ -1,17 +1,27 @@
 diff --git a/node_modules/rc-pagination/es/Options.js b/node_modules/rc-pagination/es/Options.js
-index f6c3e82..8912acc 100644
+index f6c3e82..1398b06 100644
 --- a/node_modules/rc-pagination/es/Options.js
 +++ b/node_modules/rc-pagination/es/Options.js
-@@ -178,7 +178,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
+@@ -124,7 +124,8 @@ var Options = /*#__PURE__*/function (_React$Component) {
+           selectComponentClass = _this$props3.selectComponentClass,
+           buildOptionText = _this$props3.buildOptionText,
+           selectPrefixCls = _this$props3.selectPrefixCls,
+-          disabled = _this$props3.disabled;
++          disabled = _this$props3.disabled,
++          preTextJumper = _this$props3.preTextJumper;
+       var goInputText = this.state.goInputText;
+       var prefixCls = "".concat(rootPrefixCls, "-options");
+       var Select = selectComponentClass;
+@@ -178,7 +179,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
  
          goInput = /*#__PURE__*/React.createElement("div", {
            className: "".concat(prefixCls, "-quick-jumper")
 -        }, locale.jump_to, /*#__PURE__*/React.createElement("input", {
-+        }, locale.jump_to, ' ', locale.page, gotoButton, /*#__PURE__*/React.createElement("input", {
++        }, preTextJumper ? preTextJumper : "".concat(locale.jump_to, " ").concat(locale.page), gotoButton, /*#__PURE__*/React.createElement("input", {
            disabled: disabled,
            type: "text",
            value: goInputText,
-@@ -186,7 +186,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
+@@ -186,7 +187,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
            onKeyUp: this.go,
            onBlur: this.handleBlur,
            "aria-label": locale.page
@@ -21,10 +31,20 @@ index f6c3e82..8912acc 100644
  
        return /*#__PURE__*/React.createElement("li", {
 diff --git a/node_modules/rc-pagination/es/Pagination.js b/node_modules/rc-pagination/es/Pagination.js
-index 399e7f4..f61aed2 100644
+index 399e7f4..fce837e 100644
 --- a/node_modules/rc-pagination/es/Pagination.js
 +++ b/node_modules/rc-pagination/es/Pagination.js
-@@ -456,14 +456,14 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
+@@ -380,7 +380,8 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
+           jumpNextIcon = _this$props6.jumpNextIcon,
+           selectComponentClass = _this$props6.selectComponentClass,
+           selectPrefixCls = _this$props6.selectPrefixCls,
+-          pageSizeOptions = _this$props6.pageSizeOptions;
++          pageSizeOptions = _this$props6.pageSizeOptions,
++          preTextJumper = _this$props6.preTextJumper;
+       var _this$state2 = this.state,
+           current = _this$state2.current,
+           pageSize = _this$state2.pageSize,
+@@ -456,14 +457,14 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
            size: "3"
          }), /*#__PURE__*/React.createElement("span", {
            className: "".concat(prefixCls, "-slash")
@@ -41,20 +61,40 @@ index 399e7f4..f61aed2 100644
        }
  
        if (allPages <= 3 + pageBufferSize * 2) {
+@@ -628,7 +629,8 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
+         pageSize: pageSize,
+         pageSizeOptions: pageSizeOptions,
+         quickGo: this.shouldDisplayQuickJumper() ? this.handleChange : null,
+-        goButton: goButton
++        goButton: goButton,
++        preTextJumper: preTextJumper
+       }));
+     }
+   }], [{
 diff --git a/node_modules/rc-pagination/lib/Options.js b/node_modules/rc-pagination/lib/Options.js
-index 9ddab61..9643833 100644
+index 9ddab61..ba1520c 100644
 --- a/node_modules/rc-pagination/lib/Options.js
 +++ b/node_modules/rc-pagination/lib/Options.js
-@@ -191,7 +191,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
+@@ -137,7 +137,8 @@ var Options = /*#__PURE__*/function (_React$Component) {
+           selectComponentClass = _this$props3.selectComponentClass,
+           buildOptionText = _this$props3.buildOptionText,
+           selectPrefixCls = _this$props3.selectPrefixCls,
+-          disabled = _this$props3.disabled;
++          disabled = _this$props3.disabled,
++          preTextJumper = _this$props3.preTextJumper;
+       var goInputText = this.state.goInputText;
+       var prefixCls = "".concat(rootPrefixCls, "-options");
+       var Select = selectComponentClass;
+@@ -191,7 +192,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
  
          goInput = /*#__PURE__*/_react.default.createElement("div", {
            className: "".concat(prefixCls, "-quick-jumper")
 -        }, locale.jump_to, /*#__PURE__*/_react.default.createElement("input", {
-+        }, locale.jump_to, ' ', locale.page, gotoButton, /*#__PURE__*/_react.default.createElement("input", {
++        }, preTextJumper ? preTextJumper : "".concat(locale.jump_to, " ").concat(locale.page), gotoButton, /*#__PURE__*/_react.default.createElement("input", {
            disabled: disabled,
            type: "text",
            value: goInputText,
-@@ -199,7 +199,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
+@@ -199,7 +200,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
            onKeyUp: this.go,
            onBlur: this.handleBlur,
            "aria-label": locale.page
@@ -64,10 +104,20 @@ index 9ddab61..9643833 100644
  
        return /*#__PURE__*/_react.default.createElement("li", {
 diff --git a/node_modules/rc-pagination/lib/Pagination.js b/node_modules/rc-pagination/lib/Pagination.js
-index 992be6c..fe61e5c 100644
+index 992be6c..8ddc322 100644
 --- a/node_modules/rc-pagination/lib/Pagination.js
 +++ b/node_modules/rc-pagination/lib/Pagination.js
-@@ -482,14 +482,14 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
+@@ -406,7 +406,8 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
+           jumpNextIcon = _this$props6.jumpNextIcon,
+           selectComponentClass = _this$props6.selectComponentClass,
+           selectPrefixCls = _this$props6.selectPrefixCls,
+-          pageSizeOptions = _this$props6.pageSizeOptions;
++          pageSizeOptions = _this$props6.pageSizeOptions,
++          preTextJumper = _this$props6.preTextJumper;
+       var _this$state2 = this.state,
+           current = _this$state2.current,
+           pageSize = _this$state2.pageSize,
+@@ -482,14 +483,14 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
            size: "3"
          }), /*#__PURE__*/_react.default.createElement("span", {
            className: "".concat(prefixCls, "-slash")
@@ -84,3 +134,13 @@ index 992be6c..fe61e5c 100644
        }
  
        if (allPages <= 3 + pageBufferSize * 2) {
+@@ -654,7 +655,8 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
+         pageSize: pageSize,
+         pageSizeOptions: pageSizeOptions,
+         quickGo: this.shouldDisplayQuickJumper() ? this.handleChange : null,
+-        goButton: goButton
++        goButton: goButton,
++        preTextJumper: preTextJumper
+       }));
+     }
+   }], [{

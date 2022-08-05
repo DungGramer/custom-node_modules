@@ -14,6 +14,7 @@ function App() {
         showSizeChanger
         showQuickJumper
         showTotal={(total) => `Total ${total} items`}
+        preTextJumper={'Jump to page'}
       />
     </div>
   );
