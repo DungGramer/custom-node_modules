@@ -1,0 +1,86 @@
+diff --git a/node_modules/rc-pagination/es/Options.js b/node_modules/rc-pagination/es/Options.js
+index f6c3e82..8912acc 100644
+--- a/node_modules/rc-pagination/es/Options.js
++++ b/node_modules/rc-pagination/es/Options.js
+@@ -178,7 +178,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
+ 
+         goInput = /*#__PURE__*/React.createElement("div", {
+           className: "".concat(prefixCls, "-quick-jumper")
+-        }, locale.jump_to, /*#__PURE__*/React.createElement("input", {
++        }, locale.jump_to, ' ', locale.page, gotoButton, /*#__PURE__*/React.createElement("input", {
+           disabled: disabled,
+           type: "text",
+           value: goInputText,
+@@ -186,7 +186,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
+           onKeyUp: this.go,
+           onBlur: this.handleBlur,
+           "aria-label": locale.page
+-        }), locale.page, gotoButton);
++        }));
+       }
+ 
+       return /*#__PURE__*/React.createElement("li", {
+diff --git a/node_modules/rc-pagination/es/Pagination.js b/node_modules/rc-pagination/es/Pagination.js
+index 399e7f4..f61aed2 100644
+--- a/node_modules/rc-pagination/es/Pagination.js
++++ b/node_modules/rc-pagination/es/Pagination.js
+@@ -456,14 +456,14 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
+           size: "3"
+         }), /*#__PURE__*/React.createElement("span", {
+           className: "".concat(prefixCls, "-slash")
+-        }, "/"), allPages), /*#__PURE__*/React.createElement("li", {
++        }, "/"), allPages), gotoButton, /*#__PURE__*/React.createElement("li", {
+           title: showTitle ? locale.next_page : null,
+           onClick: this.next,
+           tabIndex: this.hasPrev() ? 0 : null,
+           onKeyPress: this.runIfEnterNext,
+           className: classNames("".concat(prefixCls, "-next"), _defineProperty({}, "".concat(prefixCls, "-disabled"), !this.hasNext())),
+           "aria-disabled": !this.hasNext()
+-        }, this.renderNext(nextPage)), gotoButton);
++        }, this.renderNext(nextPage)));
+       }
+ 
+       if (allPages <= 3 + pageBufferSize * 2) {
+diff --git a/node_modules/rc-pagination/lib/Options.js b/node_modules/rc-pagination/lib/Options.js
+index 9ddab61..9643833 100644
+--- a/node_modules/rc-pagination/lib/Options.js
++++ b/node_modules/rc-pagination/lib/Options.js
+@@ -191,7 +191,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
+ 
+         goInput = /*#__PURE__*/_react.default.createElement("div", {
+           className: "".concat(prefixCls, "-quick-jumper")
+-        }, locale.jump_to, /*#__PURE__*/_react.default.createElement("input", {
++        }, locale.jump_to, ' ', locale.page, gotoButton, /*#__PURE__*/_react.default.createElement("input", {
+           disabled: disabled,
+           type: "text",
+           value: goInputText,
+@@ -199,7 +199,7 @@ var Options = /*#__PURE__*/function (_React$Component) {
+           onKeyUp: this.go,
+           onBlur: this.handleBlur,
+           "aria-label": locale.page
+-        }), locale.page, gotoButton);
++        }));
+       }
+ 
+       return /*#__PURE__*/_react.default.createElement("li", {
+diff --git a/node_modules/rc-pagination/lib/Pagination.js b/node_modules/rc-pagination/lib/Pagination.js
+index 992be6c..fe61e5c 100644
+--- a/node_modules/rc-pagination/lib/Pagination.js
++++ b/node_modules/rc-pagination/lib/Pagination.js
+@@ -482,14 +482,14 @@ var Pagination = /*#__PURE__*/function (_React$Component) {
+           size: "3"
+         }), /*#__PURE__*/_react.default.createElement("span", {
+           className: "".concat(prefixCls, "-slash")
+-        }, "/"), allPages), /*#__PURE__*/_react.default.createElement("li", {
++        }, "/"), allPages), gotoButton, /*#__PURE__*/_react.default.createElement("li", {
+           title: showTitle ? locale.next_page : null,
+           onClick: this.next,
+           tabIndex: this.hasPrev() ? 0 : null,
+           onKeyPress: this.runIfEnterNext,
+           className: (0, _classnames.default)("".concat(prefixCls, "-next"), (0, _defineProperty2.default)({}, "".concat(prefixCls, "-disabled"), !this.hasNext())),
+           "aria-disabled": !this.hasNext()
+-        }, this.renderNext(nextPage)), gotoButton);
++        }, this.renderNext(nextPage)));
+       }
+ 
+       if (allPages <= 3 + pageBufferSize * 2) {
